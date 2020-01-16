@@ -5,62 +5,66 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegisterCaptain extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String teamName=request.getParameter("teamname");
-        String name = request.getParameter("name");
-        Integer employeeId=Integer.parseInt(request.getParameter("employeeid"));
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        String gender[]=request.getParameterValues("gender");
-        Integer mobileno=Integer.parseInt(request.getParameter("mobileno"));
-        String checkedSkills[]=request.getParameterValues("skills");
-        Integer rating=Integer.parseInt("0");
+        PrintWriter out = null;
         try {
-
-            // loading drivers for mysql
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //creating connection with the database
-            Connection con = DriverManager.getConnection
-                    ("jdbc:mysql://localhost:3306/testdb","testuser","password");
-
-            PreparedStatement ps = con.prepareStatement
-                    ("insert into employee_info values(?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1,teamName);
-            ps.setString(2, name);
-            ps.setInt(3,employeeId);
-            ps.setString(4, email);
-            ps.setString(5, pass);
-            String genderValue="";
-            for(int i=0;i<gender.length;i++){
-                genderValue+=gender[i]+"";
-            }
-            ps.setString(6,genderValue);
-            ps.setInt(7,mobileno);
-            String skillValues="";
-            for(int i=0;i<checkedSkills.length;i++){
-                skillValues+=checkedSkills[i]+" ";
-            }
-            ps.setString(8,skillValues);
-            ps.setInt(9,rating);
-            ps.setString(10,"Captain");
-            int i = ps.executeUpdate();
-
-            if(i > 0) {
-                out.println(name+" sucessfully registered");
-            }
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(Exception se) {
-            se.printStackTrace();
+        String teamName = request.getParameter("teamname");
+        String name = request.getParameter("name");
+        Integer employeeId = Integer.parseInt(request.getParameter("employeeid"));
+        String email = request.getParameter("email");
+        String password = request.getParameter("pass");
+        String gender[] = request.getParameterValues("gender");
+        String genderValue = "";
+        for (int i = 0; i < gender.length; i++) {
+            genderValue += gender[i] + "";
+        }
+        Integer mobileNumber = Integer.parseInt(request.getParameter("mobileno"));
+        String checkedSkills[] = request.getParameterValues("skills");
+        String skills = "";
+        for (int i = 0; i < checkedSkills.length; i++) {
+            skills += checkedSkills[i] + " ";
+        }
+        Integer rating = Integer.parseInt("0");
+
+        DatabaseRepository databaseRepository = new DatabaseRepository();
+
+        boolean insertionResult = databaseRepository.insertCaptainData(new Register(teamName, name, employeeId, email, password, genderValue, mobileNumber, skills, rating));
+
+        if (insertionResult) {
+            out.println(name + " " + "Data Inserted SuccessFully");
         }
     }
-}
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //super.doGet(req, resp);
+        DatabaseRepository databaseRepository = new DatabaseRepository();
+
+        String email = req.getParameter("emailId");
+        String password = req.getParameter("passwordId");
+
+        ResultSet resultSet = databaseRepository.verifyLogin(email,password);
+
+        try {
+            if(resultSet.next()) {
+                resp.getWriter().write("1");
+            }
+            else{
+                resp.getWriter().write("Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    }

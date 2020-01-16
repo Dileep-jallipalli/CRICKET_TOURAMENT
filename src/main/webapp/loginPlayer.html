@@ -2,6 +2,7 @@
 
 <head>
     <link href="style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -50,7 +51,16 @@
     </tr>
 </table>
 <div class="mainBackground">
+    <h1>Player Login</h1>
+    <form method="get" action="register">
+        <label><b>Email ID:</b><input type="text" name="emailId" class="label" id="emailId"required></label><br/>
+        <label><b>Password:</b><input type="password" name="passwordId" class="label" id="passwordId"required></label><br/>
+        <label>
+            <input type="button" value="Login" class="registerButton" id="buttonId"/>
+        </label>
+    </form>
 </div>
-</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="script.js" ></script>
 
-</html>
+</body>
