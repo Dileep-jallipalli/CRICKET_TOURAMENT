@@ -56,7 +56,7 @@ public class RegisterPlayer extends HttpServlet {
                 resp.getWriter().write("1");
             }
             else{
-                resp.getWriter().write("Failed");
+                resp.getWriter().write("Invalid username or password");
             }
         } catch (SQLException e) {
             e.printStackTrace();

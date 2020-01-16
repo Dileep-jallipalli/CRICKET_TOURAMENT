@@ -8,10 +8,10 @@ emailId : email,
 passwordId : password
 }, function(responseText) {
 if(responseText=="1"){
-window.location.assign("/index.jsp");
+window.location.replace("index.html");
 }
 else{
-      $('#ajaxGetUserServletResponse').text(responseText);
+      alert(responseText);
      }
 },);
 });

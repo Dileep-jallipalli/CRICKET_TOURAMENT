@@ -12,9 +12,9 @@ class DatabaseRepository extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
 
             //creating connection with the database
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/new", "testuser", "password");
             Connection con = DriverManager.getConnection
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
-
             PreparedStatement ps = con.prepareStatement
                     ("insert into employee_info values(?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, playerDetails.getTeamName());
@@ -41,6 +41,7 @@ class DatabaseRepository extends HttpServlet {
         ResultSet resultSet = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
+           // Connection con = DriverManager.getConnection ("jdbc:mysql://localhost:3306/new", "testuser", "password");
             Connection con = DriverManager.getConnection
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
 
@@ -60,6 +61,8 @@ class DatabaseRepository extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
 
             //creating connection with the database
+          //  Connection con = DriverManager.getConnection ("jdbc:mysql://localhost:3306/new", "testuser", "password");
+
             Connection con = DriverManager.getConnection
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
 
