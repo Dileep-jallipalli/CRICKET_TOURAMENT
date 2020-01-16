@@ -19,8 +19,8 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>registerCaptain</servlet-name>
-    <url-pattern>/registerCaptain</url-pattern>
-<!--    <url-pattern>/loginCap</url-pattern>-->
+    <url-pattern>/registerCap</url-pattern>
+    <url-pattern>/loginCap</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
