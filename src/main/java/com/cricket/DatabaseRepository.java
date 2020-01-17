@@ -5,7 +5,7 @@ import java.sql.*;
 
 class DatabaseRepository extends HttpServlet {
 
-    public boolean insertPlayerData(Register playerDetails) {
+    public boolean insertPlayerData(UserRegistration userRegistration) {
         try {
 
             // loading drivers for mysql
@@ -16,17 +16,15 @@ class DatabaseRepository extends HttpServlet {
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
 
             PreparedStatement ps = con.prepareStatement
-                    ("insert into employee_info values(?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1, playerDetails.getTeamName());
-            ps.setString(2, playerDetails.getName());
-            ps.setInt(3, playerDetails.getEmployeeId());
-            ps.setString(4, playerDetails.getEmail());
-            ps.setString(5, playerDetails.getPassword());
-            ps.setString(6, playerDetails.getGender());
-            ps.setInt(7, playerDetails.getMobileNumber());
-            ps.setString(8, playerDetails.getSkills());
-            ps.setInt(9, playerDetails.getRating());
-            ps.setString(10, "Player");
+                    ("insert into user_registration values(?,?,?,?,?,?,?,?)");
+            ps.setString(1, userRegistration.getName());
+            ps.setInt(2, userRegistration.getUserId());
+            ps.setString(3, userRegistration.getEmail());
+            ps.setString(4, userRegistration.getPassword());
+            ps.setString(5, userRegistration.getGender());
+            ps.setInt(6, userRegistration.getMobileNumber());
+            ps.setString(7,userRegistration.getRole());
+            ps.setString(8, userRegistration.getSkills());
             int i = ps.executeUpdate();
             return i > 0;
         } catch (ClassNotFoundException | SQLException e) {
@@ -44,7 +42,7 @@ class DatabaseRepository extends HttpServlet {
             Connection con = DriverManager.getConnection
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
 
-            PreparedStatement stmt = con.prepareStatement("select * from employee_info where email='" + email + "' AND pass='" + password + "'");
+            PreparedStatement stmt = con.prepareStatement("select * from user_registration where email='" + email + "' AND password='" + password + "'");
             resultSet = stmt.executeQuery();
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -53,36 +51,37 @@ class DatabaseRepository extends HttpServlet {
         return resultSet;
     }
 
-    public boolean insertCaptainData(Register captainDetails) {
-
+    public boolean insertTeamData(TeamRegistration teamDetails){
         try {
-            // loading drivers for mysql
             Class.forName("com.mysql.jdbc.Driver");
-
-            //creating connection with the database
-            Connection con = DriverManager.getConnection
-                    ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
-
-            PreparedStatement ps = con.prepareStatement
-                    ("insert into employee_info values(?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1, captainDetails.getTeamName());
-            ps.setString(2, captainDetails.getName());
-            ps.setInt(3, captainDetails.getEmployeeId());
-            ps.setString(4, captainDetails.getEmail());
-            ps.setString(5, captainDetails.getPassword());
-
-            ps.setString(6, captainDetails.getGender());
-            ps.setInt(7, captainDetails.getMobileNumber());
-
-            ps.setString(8, captainDetails.getSkills());
-            ps.setInt(9, captainDetails.getRating());
-            ps.setString(10, "Captain");
-            int i = ps.executeUpdate();
-
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
+            PreparedStatement preparedStatement=connection.prepareStatement
+                    ("insert into team_registration values(?,?,?)");
+            preparedStatement.setString(1, teamDetails.getTeamName());
+            preparedStatement.setString(2, teamDetails.getCity());
+            preparedStatement.setInt(3, teamDetails.getUserId());
+            int i = preparedStatement.executeUpdate();
             return i > 0;
-        } catch (Exception se) {
-            se.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
         return false;
     }
+
+
+    public ResultSet getTeamDetails(){
+        ResultSet resultSet=null;
+        try{
+         Class.forName("com.mysql.jdbc.Driver");
+         Connection con = DriverManager.getConnection
+                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
+
+         PreparedStatement ps = con.prepareStatement("select * from team_registration");
+          resultSet=ps.executeQuery();
+         }
+        catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+     }
 }

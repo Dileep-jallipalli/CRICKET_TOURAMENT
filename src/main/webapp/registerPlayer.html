@@ -1,8 +1,9 @@
 <html>
+
 <head>
-    <title>Registration form</title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
 <div class="header">
     <img class="logo"
@@ -13,25 +14,16 @@
 </div>
 <table class="log">
     <tr>
-        <td>
+        <td >
             <a class="nav" href="index.html">Home </a>
         </td>
-        <td>
-            <select class="nav" onchange="la(this.value)">
-                <option>Register</option>
-                <option value="registerPlayer.html">Register As Player</option>
-                <option value="registerCaptain.html">Register as captain</option>
-            </select>
-            <script>
-                function la(src){
-                window.location=src;
-                }
-            </script>
+        <td >
+            <a class="nav" href="registerPlayer.html">Register </a>
         </td>
-        <td>
+        <td >
             <a class="nav" href="schedule.html">Schedule </a>
         </td>
-        <td>
+        <td >
             <a class="nav" href="rules.html">Rules </a>
         </td>
     </tr>
@@ -41,19 +33,24 @@
         <h1 style="text-align:center">Please fill below details for registration</h1>
         <form method="post" action="register">
             <label><b>Name:</b><input type="text" name="name" autofocus="autofocus" class="label" required></label><br/>
-            <label><b>Employee Id:</b><input type="text" name="employeeid" class="label" required></label><br/>
+            <label><b>User Id:</b><input type="text" name="userId" class="label" required></label><br/>
             <label><b>Email ID:</b><input type="email" name="email" class="label" required></label><br/>
             <label><b>Password:</b><input type="password" name="pass" class="label" required></label><br/>
             <label><b>Gender:</b></label><input type="radio" name="gender" class="label" value="male" required>Male
             <input type="radio" name="gender" class="label" value="female" required>Female<br/>
-            <label><b>Mobile Number:</b><input type="text" name="mobileno" class="label" required></label><br/>
-            <!--        <label>Profile Photo:<input type="image" src=""/></label>-->
+            <label><b>Mobile Number:</b><input type="text" name="mobileNumber" class="label" required></label><br/>
+            <!-- <label>Profile Photo:<input type="image" src=""/></label>-->
+            <label><b>Role:</b></label><input type="radio" name="role" class="label" value="Player" required>Player
+            <input type="radio" name="role" class="label" value="Owner" required>Owner<br/>
             <label>
-                <b>Skills:</b>
-                <input type="checkbox" name="skills" value="Batting">Batting
-                <input type="checkbox" name="skills" value="Bowling">Bowling
-                <input type="checkbox" name="skills" value="Keeper">Keeper
-                <input type="checkbox" name="skills" value="AllRounder">All Rounder<br/>
+                <fieldset>
+                    <legend><b>Player Skills:</b></legend>
+                    <input type="checkbox" name="skills" value="Batting">Batting
+                    <input type="checkbox" name="skills" value="Bowling">Bowling
+                    <input type="checkbox" name="skills" value="Keeper">Keeper
+                    <input type="checkbox" name="skills" value="AllRounder">All Rounder
+                    <input type="checkbox" name="skills" value="None">None<br/>
+                </fieldset>
             </label>
             <br/>
             <label>
@@ -62,5 +59,7 @@
         </form>
     </div>
 </div>
+
+
 </body>
 </html>

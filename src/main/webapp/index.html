@@ -2,7 +2,13 @@
 
 <head>
     <link href="style.css" rel="stylesheet">
+    <style>
+    input{
+     height:29px;width:300px;text-align :center;
+     }
+    </style>
 </head>
+
 
 <body>
 <div class="header">
@@ -14,43 +20,34 @@
 </div>
 <table class="log">
     <tr>
-        <td>
+        <td >
             <a class="nav" href="index.html">Home </a>
         </td>
-        <td>
-            <select class="nav" onchange="la(this.value)">
-                <option>Register</option>
-                <option value="registerPlayer.html">Register As Player</option>
-                <option value="registerCaptain.html">Register as captain</option>
-            </select>
-            <script>
-                function la(src){
-                window.location=src;
-                }
-            </script>
+        <td >
+            <a class="nav" href="registerPlayer.html">Register </a>
         </td>
-        <td>
+        <td >
             <a class="nav" href="schedule.html">Schedule </a>
         </td>
-        <td>
+        <td >
             <a class="nav" href="rules.html">Rules </a>
-        </td>
-        <td>
-            <select class="nav" onchange="la(this.value)">
-                <option>Login</option>
-                <option value="loginPlayer.html">Login As Player</option>
-                <option value="loginCaptain.html">Login as captain</option>
-            </select>
-            <script>
-                function la(src){
-                window.location=src;
-                }
-            </script>
         </td>
     </tr>
 </table>
 <div class="mainBackground">
+    <div><button class="loginButton" type="button" onclick="document.getElementById('loginId').style.opacity=1">Login</button></div>
+    <div id="loginId" class="login">
+        <h1 style="text-align: center;">Login Here</h1>
+        <form method="get" action="register">
+            <label><br><input placeholder="E-Mail" type="email" name="emailId" class="label" required id="emailId"></label><br/>
+            <label><input placeholder="Password" type="password" name="passwordId" class="label" required id="passwordId"></label><br/>
+            <label> <input type="submit" value="Login" class="loginButton" id="buttonId" /> </label>
+        </form>
+    </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="script.js" ></script>
+
 </body>
 
 </html>

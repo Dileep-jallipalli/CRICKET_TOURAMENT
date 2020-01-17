@@ -7,10 +7,13 @@ $.get('register', {
 emailId : email,
 passwordId : password
 }, function(responseText) {
-if(responseText=="1"){
-window.location.replace("index.html");
+if(responseText==="admin"){
+window.location.replace("admin.html");
 }
-else{
+else if(responseText=="Owner"){
+window.location.replace("Owner/ownerLogin.html");
+}
+else {
       alert(responseText);
      }
 },);

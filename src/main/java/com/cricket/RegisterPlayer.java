@@ -15,9 +15,8 @@ public class RegisterPlayer extends HttpServlet {
         //super.doPost(req, resp);
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String teamName = "";
         String name = request.getParameter("name");
-        Integer employeeId = Integer.parseInt(request.getParameter("employeeid"));
+        Integer userId = Integer.parseInt(request.getParameter("userId"));
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
         String gender[] = request.getParameterValues("gender");
@@ -25,21 +24,25 @@ public class RegisterPlayer extends HttpServlet {
         for (int i = 0; i < gender.length; i++) {
             genderValue = genderValue + (gender[i] + "");
         }
-        Integer mobileNumber = Integer.parseInt(request.getParameter("mobileno"));
+        Integer mobileNumber = Integer.parseInt(request.getParameter("mobileNumber"));
+
+        String role[] = request.getParameterValues("role");
+        String roleValue = "";
+        for (int i = 0; i < role.length; i++) {
+            roleValue = roleValue + (role[i] + "");
+        }
         String checkedSkills[] = request.getParameterValues("skills");
         String skills = "";
         for (int i = 0; i < checkedSkills.length; i++) {
             skills += checkedSkills[i] + " ";
         }
-        Integer rating = Integer.parseInt("0");
         DatabaseRepository databaseRepository = new DatabaseRepository();
-        boolean insertionresult = databaseRepository.insertPlayerData(new Register(teamName, name, employeeId, email, password, genderValue, mobileNumber, skills, rating));
-
-        if(insertionresult){
-            out.println("Succesfully inserted");
+        boolean insertions = databaseRepository.insertPlayerData(new UserRegistration(name,userId,email,password,genderValue,mobileNumber,roleValue,skills));
+        if(insertions){
+            response.getWriter().write("Data Inserted successfully");
         }
         else{
-            out.println("Data is not Inserted");
+            response.getWriter().write("Data not inserted properly");
         }
     }
     @Override
@@ -53,7 +56,7 @@ public class RegisterPlayer extends HttpServlet {
 
         try {
             if(resultSet.next()) {
-                resp.getWriter().write("1");
+                resp.getWriter().write(resultSet.getString(7));
             }
             else{
                 resp.getWriter().write("Invalid username or password");
