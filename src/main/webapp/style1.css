@@ -1,0 +1,31 @@
+body{
+    margin:0;
+    padding: 0;;
+}
+.card{
+    height:150px;
+    width: 300px;
+    border:1px solid black; 
+    border-radius: 3px;
+    margin:10px;
+    padding:10px;
+    box-sizing: border-box;
+    background-color: rgb(230, 240, 240);
+}
+.userId{
+    text-align: center;
+    font-size: 20px;
+    padding:12px;
+}
+
+.teamName{
+    text-align: center;
+    font-size: 30px;
+    padding:10 px;
+}
+
+.city{
+    text-align: center;
+    font-size: 20px;
+    padding:10 px;
+}

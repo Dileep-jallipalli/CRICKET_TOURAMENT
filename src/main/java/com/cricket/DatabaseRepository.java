@@ -1,5 +1,8 @@
 package com.cricket;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import javax.servlet.http.HttpServlet;
 import java.sql.*;
 
@@ -69,8 +72,9 @@ class DatabaseRepository extends HttpServlet {
     }
 
 
-    public ResultSet getTeamDetails(){
+    public JSONObject getTeamDetails(){
         ResultSet resultSet=null;
+        JSONObject jsonObject = new JSONObject();
         try{
          Class.forName("com.mysql.jdbc.Driver");
          Connection con = DriverManager.getConnection
@@ -78,10 +82,22 @@ class DatabaseRepository extends HttpServlet {
 
          PreparedStatement ps = con.prepareStatement("select * from team_registration");
           resultSet=ps.executeQuery();
+
+            JSONArray jsonArray = new JSONArray();
+
+            while(resultSet.next()){
+                JSONObject record  =new JSONObject();
+                record.put("TeamName",resultSet.getString("teamName"));
+                record.put("city",resultSet.getString("city"));
+                record.put("UserId",resultSet.getInt("userId"));
+                jsonArray.put(record);
+            }
+
+            jsonObject.put("Teams_data",jsonArray);
          }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return jsonObject;
      }
 }

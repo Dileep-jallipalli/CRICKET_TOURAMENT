@@ -11,7 +11,7 @@ if(responseText==="admin"){
 window.location.replace("admin.html");
 }
 else if(responseText=="Owner"){
-window.location.replace("Owner/ownerLogin.html");
+window.location.replace("ownerLogin.html");
 }
 else {
       alert(responseText);

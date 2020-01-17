@@ -1,0 +1,35 @@
+body{
+    margin:0;
+    padding: 0;
+}
+.mainDiv{
+    background-color: rgb(129, 243, 243);
+    padding:25px;
+    box-sizing: border-box;
+}
+.tournamentName{
+    padding-top:25px;
+    background-color: rgb(255, 255, 255);
+    height:120px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-size:25px ;
+    margin-bottom: 30px;
+}
+.tournamentName label{
+    font-size: 40px;
+    padding-top:10px;
+}
+.tournamentName input[type=text]{
+    width:70%;
+    padding:18px;
+    border-radius: 40px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+
+}
+.registration{
+    padding-top: 10px; 
+    padding-right: 5px;  
+}

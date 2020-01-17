@@ -1,12 +1,13 @@
 package com.cricket;
 
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 
 public class RegisterTeam extends HttpServlet {
 
@@ -31,7 +32,7 @@ public class RegisterTeam extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         DatabaseRepository databaseRepository = new DatabaseRepository();
-        ResultSet resultSet = databaseRepository.getTeamDetails();
-        resp.getWriter().write(String.valueOf(resultSet));
+        JSONObject jsonObject = databaseRepository.getTeamDetails();
+        resp.getWriter().write(String.valueOf(jsonObject));
     }
 }
