@@ -1,6 +1,6 @@
 function loadData(){
 var jsonData;
-$.get('registerTeam', {
+$.get('register', {
 }, function(responseText){
     console.log(responseText);
 
@@ -10,7 +10,7 @@ $.get('registerTeam', {
       app.setAttribute('id','root');
       document.body.appendChild(app);
 
-  var data  = jsonData["Teams_data"];
+  var data  = jsonData["OwnerTeam_data"];
    console.log(data);
   for(i=0;i<data.length;i++){
       console.log(data);
@@ -22,21 +22,12 @@ $.get('registerTeam', {
 
 function create_template(data){
     const template = `<div class="card">
-        <div class="details">Team Name:${data.TeamName}</div>
+        <div class="details">Name:${data.Name}</div>
         <div class="details">Id:${data.UserId}</div>
-        <div class="details">City:${data.city}</div>
-        <button class="teamDetailsButton" onclick="TeamDetails(${data.UserId})">Get Details</button>
+        <div class="details">Ph no:${data.MobileNumber}</div>
+        <div class="details">Email:${data.EmailId}</div>
+        <div class="details">Skills:${data.Skills}</div>
       </div>`;
 
      return template;
 };
-function TeamDetails(UserId){
-        var user=UserId;
-        $.post('PlayerServlet', {
-            userId : user,
-        },
-  );
-window.location.replace("playerTeam.html");
-}
-
-

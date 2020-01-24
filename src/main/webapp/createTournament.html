@@ -2,31 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Tournament</title>
     <link rel="stylesheet" href=tournament.css>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="logout.js" ></script>
 </head>
 <body>
-    <div class = "mainDiv">
-        <div class = "tournamentName">
-            <label>TournamentName : </label>
-            <input  id ="txt" type = "text" placeholder="Enter tournament Name">
-        </div>
-        <div class="registration">
-            <label>Registration Starts on : </label>
-            <input type="date" placeholder="Select registration start Date">
-            <label>Registration Ends on : </label>
-            <input type="date" placeholder="Select registration end Date">
-        </div>
-        <div class="overs">
-            <label >Enter overs : </label>
-            <input type="number" placeholder="Enter the number of Overs">
-        </div>
-        <div class="trails">
-            <label>Trails Held On : </label>
-            <input type="date"><br/>
-            <label>Auctions is held on : </label>
-            <input type="date">
-        </div>
+<div class="header">
+    <a href="index.html">
+        <img class="logo"
+             src="logo.jpg">
+    </a>
+    <h1 style="color: aliceblue;text-align:center;">
+        Pramati Cricket League
+    </h1>
+</div>
+<table class="log">
+    <tr>
+        <td >
+            <a class="nav" href="adminLogin.html">Home </a>
+        </td>
+        <td >
+            <a class="nav" href="createTournament.html">CreateTournament</a>
+        </td>
+        <td>
+            <a class="nav" href="teams.html">Teams </a>
+        </td>
+        <td >
+            <a class="nav" href="schedule.html">Schedule </a>
+        </td>
+        <td >
+            <a class="nav" href="rating.html">Rating</a>
+        </td>
+        <td>
+            <input type="submit" class = "nav" value="Logout" id="logoutButton">
+        </td>
+    </tr>
+</table>
+<div class="mainBackground">
+<div class = "mainDiv" >
+    <form method="post" action="TournamentServlet">
+    <div class="tournamentName">
+        <label>TournamentName:</label>
+        <input type="text" placeholder="enter tournament Name" name="tournamentName">
     </div>
+
+    <fieldset>
+        <legend>Registration Dates:</legend>
+        <div class="registration">
+            <label>Start Date:</label>
+            <input type="date" placeholder="enter registration start date" name="startDate">
+            <span>
+                <label>Close Date:</label>
+                <input type="date" placeholder="enter registration close date" name="closeDate">
+            </span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Match Type:</legend>
+        <div class="matchType">
+            <label>Format:</label>
+            <input type="radio" name="format" value="knockout">Knock Out
+            <br/>
+            <label>Overs:</label>
+            <input type="number" placeholder="enter number of overs" name="overs">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Trails Dates:</legend>
+        <div class="trails">
+            <label>Start Date:</label>
+            <input type="date" placeholder="enter trails start date" name="trailStart">
+            <span>
+                            <label>Close Date:</label>
+                            <input type="date" placeholder="enter trails close data" name="trailEnd">
+            </span>
+        </div>
+    </fieldset>
+
+    <input type="submit" class="nav" value="Submit">
+</form>
+</div>
+</div>
 </body>
 </html>

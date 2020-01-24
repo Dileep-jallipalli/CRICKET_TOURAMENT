@@ -1,6 +1,6 @@
 package com.cricket;
 
-public class UserRegistration {
+public class User {
     private String name;
     private int userId;
     private String email;
@@ -8,11 +8,8 @@ public class UserRegistration {
     private String gender;
     private int mobileNumber;
     private String role;
-    private String skills;
+    private  String skills;
 
-    public UserRegistration(){
-
-    }
     public String getName() {
         return name;
     }
@@ -77,7 +74,7 @@ public class UserRegistration {
         this.skills = skills;
     }
 
-    public UserRegistration(String name, int userId, String email, String password, String gender, int mobileNumber, String role, String skills) {
+    public User(String name, int userId, String email, String password, String gender, int mobileNumber, String role, String skills) {
         this.name = name;
         this.userId = userId;
         this.email = email;
@@ -90,7 +87,7 @@ public class UserRegistration {
 
     @Override
     public String toString() {
-        return "Register{" +
+        return "UserRegistration{" +
                 "name='" + name + '\'' +
                 ", userId=" + userId +
                 ", email='" + email + '\'' +

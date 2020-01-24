@@ -1,11 +1,11 @@
 package com.cricket;
 
-public class TeamRegistration {
+public class Team {
     private String teamName;
     private int userId;
     private String city;
 
-    public TeamRegistration(){
+    public Team(){
 
     }
     public String getTeamName() {
@@ -32,7 +32,7 @@ public class TeamRegistration {
         this.city = city;
     }
 
-    public TeamRegistration(String teamName, int userId, String city) {
+    public Team(String teamName, int userId, String city) {
         this.teamName = teamName;
         this.userId = userId;
         this.city = city;

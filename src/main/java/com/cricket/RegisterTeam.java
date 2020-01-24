@@ -3,6 +3,7 @@ package com.cricket;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +17,11 @@ public class RegisterTeam extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         String teamName = req.getParameter("teamName");
-        Integer userId = Integer.parseInt(req.getParameter("userId"));
         String city = req.getParameter("city");
         DatabaseRepository databaseRepository = new DatabaseRepository();
-        boolean insertionResult = databaseRepository.insertTeamData(new TeamRegistration(teamName, userId, city));
+        Cookie ck[]=req.getCookies();
+        int userId= Integer.parseInt(ck[0].getValue());
+        boolean insertionResult = databaseRepository.insertTeamData(new Team(teamName, userId, city));
 
         if(insertionResult){
             resp.getWriter().write("Data Inserted successfully");
