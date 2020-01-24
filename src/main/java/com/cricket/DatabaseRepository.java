@@ -315,19 +315,29 @@ class DatabaseRepository extends HttpServlet {
     }
 
     public JSONObject getTodayMatchTeams(String date) {
-        List<String> teamNames = new ArrayList<>();
-        JSONObject jsonObject = null;
+        JSONObject jsonObject = new JSONObject();
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection
                     ("jdbc:mysql://localhost:3306/taskdb", "dileep", "Dileep@123");
-            PreparedStatement preparedStatement = con.prepareStatement("select teamName from team_registration where userId=(select team1_Id from Schedule where matchDate='" + date + "')");
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                teamNames.add(rs.getString("teamName"));
+            PreparedStatement preparedStatement = con.prepareStatement("select teamName,userId from team_registration where userId=(select team1_Id from Schedule where matchDate='" + date + "')");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            JSONArray jsonArray = new JSONArray();
+            while (resultSet.next()) {
+                JSONObject record = new JSONObject();
+                record.put("TeamName", resultSet.getString("teamName"));
+                record.put("TeamId",resultSet.getString("userId"));
+                jsonArray.put(record);
             }
-            System.out.println(teamNames);
-            jsonObject = new JSONObject(teamNames);
+            PreparedStatement preparedStatement1 = con.prepareStatement("select teamName,userId from team_registration where userId=(select team2_Id from Schedule where matchDate='" + date + "')");
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            while (resultSet1.next()) {
+                JSONObject record = new JSONObject();
+                record.put("TeamName", resultSet1.getString("teamName"));
+                record.put("TeamId",resultSet1.getString("userId"));
+                jsonArray.put(record);
+            }
+            jsonObject.put("Todays_Teams", jsonArray);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
